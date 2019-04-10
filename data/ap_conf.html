@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>Station - WiFi Configuration</title>
+</head>
+
+<style>
+    h1 {
+        text-align: center;
+        color: #45a049;
+        text-transform: uppercase;
+        padding-top: 20px;
+    }
+
+    h5 {
+        text-align: center;
+    }
+
+    .center {
+        margin: auto;
+        width: 300px;
+    }
+
+    input[type=text],
+    input[type=password],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    div {
+        border-radius: 5px;
+        padding: 10px;
+    }
+</style>
+
+<body>
+    <div class="center">
+        <h1>STATION</h1>
+        <h5>Configure WiFi access point connection</h5>
+
+        <div class="" id="ap_form">
+
+            <form action="/ap_conf_submit" method="GET">
+
+                <div>
+                    <label for="SSID">AP SSID</label>
+                    <input type="text" name="SSID" id="SSID" placeholder="Enter Access Point SSID">
+                </div>
+
+                <div>
+                    <label for="password">AP Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter Access Point Password">
+                </div>
+
+                <div>
+                    <label for="token">API Token</label>
+                    <input type="text" name="token" id="token" placeholder="Enter API Token">
+                </div>
+
+                <button type="submit">CONNETTI</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
