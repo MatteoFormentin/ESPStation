@@ -1,5 +1,7 @@
-//ESPTATION v1.00
-//Set NODEMCU v1
+/*-----------------------------------------
+ *      ESPTATION - METEO SERVER
+ *      www.matteoformentin.com    
+ *----------------------------------------*/
 
 #include "config.h"
 #include <ArduinoJson.h>
@@ -37,6 +39,7 @@ void setup()
         /*---- CHECK FOR FIRMWARE UPDATES ----*/
         getUpdate();
 
+        /*---- GO TO SLEEP ----*/
         ESP.deepSleep(SLEEP_TIME * 60000000); //In microseconds
     }
 }

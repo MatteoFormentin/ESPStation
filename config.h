@@ -4,14 +4,18 @@
 
 #ifndef CONFIG_H
 
-#define FIRMWARE_VERSION "1.0.0" //For OTA
+//OTA PARAMETERS 
+#define FIRMWARE_VERSION "1.0.0" 
+#define MODEL "esp_station"
+
+//CONFIGURATION NETWORK 
 #define HOSTNAME "ESPStation"
 
 #define SLEEP_TIME 10 //Minutes
 #define BUFFER_SIZE 50
 
-//FUNCTION ENABLED
-#define BMP280_ENABLE 1
+//FUNCTION ENABLED Comment to disable
+#define BMP280_ENABLE 0
 #define DHT22_ENABLE 1
 #define SDS011_ENABLE 1
 
