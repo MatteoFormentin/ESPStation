@@ -5,7 +5,6 @@
 #include <FS.h>
 #include "config.h"
 
-
 ESP8266WebServer webInterface(80);
 
 struct APConf
@@ -133,7 +132,7 @@ char *getToken()
 void sendDataToMeteoServer(String json)
 {
     HTTPClient http;
-    http.begin("http://meteo.matteoformentin.com/api/update");
+    http.begin("http://" + String(METEO_SERVER_URL) + "/api/update");
     http.addHeader("Content-Type", "application/json");
     http.POST(json);
     http.end();
@@ -141,8 +140,7 @@ void sendDataToMeteoServer(String json)
 
 void getUpdate()
 {
-    Serial.println("Make request"); // may not called we reboot the ESP
-    t_httpUpdate_return ret = ESPhttpUpdate.update("meteo.matteoformentin.com", 80, "/api/firmware_update/air_quality_station", FIRMWARE_VERSION);
+    t_httpUpdate_return ret = ESPhttpUpdate.update(METEO_SERVER_URL, 80, "/api/firmware_update/air_quality_station", FIRMWARE_VERSION);
     switch (ret)
     {
     case HTTP_UPDATE_FAILED:

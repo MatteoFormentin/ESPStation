@@ -18,17 +18,15 @@ void setup()
 #ifdef BMP280_ENABLE
         setupBMP();
 #endif
-
 #ifdef DHT22_ENABLE
         setupDHT();
 #endif
-
 #ifdef SDS011_ENABLE
         setupSDS();
 #endif
-        delay(10000); //Wait some time to make sensor acquire some sample
 
-        /*---- SEND DATA ----*/
+        /*---- GET AND SEND DATA ----*/
+        delay(10000); //Wait some time to make sensor acquire some sample
         postData();
 
         /*---- SLEEP SENSOR ----*/
@@ -37,6 +35,7 @@ void setup()
 #endif
 
         /*---- CHECK FOR FIRMWARE UPDATES ----*/
+        delay(1000);
         getUpdate();
 
         /*---- GO TO SLEEP ----*/
@@ -53,16 +52,13 @@ void postData()
 {
     StaticJsonDocument<200> doc;
     doc["token"] = getToken();
-
 #ifdef BMP280_ENABLE
     doc["pressure"] = getPressure();
 #endif
-
 #ifdef DHT22_ENABLE
     doc["temperature"] = getTemperature();
     doc["humidity"] = getHumidity();
 #endif
-
 #ifdef SDS011_ENABLE
     doc["air_quality"]["PM25"] = getPm25();
     doc["air_quality"]["PM10"] = getPm10();
