@@ -1,13 +1,8 @@
-
-#include "src/BMP280/Adafruit_BMP280.h"
-#include <DHT.h>
-#include <DHT_U.h>
-#include "src/SDS011/SDS011.h"
-
 /*-----------------------------------
  *              BMP 280
  *----------------------------------*/
 #ifdef BMP280_ENABLE
+#include "src/BMP280/Adafruit_BMP280.h"
 
 Adafruit_BMP280 bmp;
 
@@ -26,6 +21,9 @@ float getPressure()
  *              DHT 22
  *----------------------------------*/
 #ifdef DHT22_ENABLE
+
+#include <DHT.h>
+#include <DHT_U.h>
 
 DHT_Unified dht(DHT_DATA_PIN, DHT22);
 
@@ -52,6 +50,8 @@ float getHumidity()
  *              SDS011
  *----------------------------------*/
 #ifdef SDS011_ENABLE
+#include "src/SDS011/SDS011.h"
+
 
 SDS011 sds_sensor;
 

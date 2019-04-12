@@ -5,8 +5,8 @@
 #ifndef CONFIG_H
 
 //OTA PARAMETERS 
-#define FIRMWARE_VERSION "1.0.0" //Remind to update else update will be always performed
-#define MODEL "esp_station" //Update model on Meteo Server must be equal
+#define FIRMWARE_VERSION "1.0.1" //Remind to update else update will be always performed
+#define MODEL "air_quality_station" //Update model on Meteo Server must be equal
 #define METEO_SERVER_URL "meteo.matteoformentin.com" //Without ending /
 
 //CONFIGURATION NETWORK 
@@ -15,7 +15,7 @@
 //FUNCTION ENABLED (Comment to disable)
 #define BMP280_ENABLE
 #define DHT22_ENABLE
-//#define SDS011_ENABLE
+#define SDS011_ENABLE
 
 //PIN CONFIGURATION
 #define DHT_DATA_PIN D6
