@@ -52,6 +52,8 @@ void postData()
 {
     StaticJsonDocument<200> doc;
     doc["token"] = getToken();
+    doc["model"] = String(MODEL);
+    doc["firmware_version"] = String(FIRMWARE_VERSION);
 #ifdef BMP280_ENABLE
     doc["pressure"] = getPressure();
 #endif

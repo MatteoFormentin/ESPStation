@@ -15,7 +15,7 @@
 //FUNCTION ENABLED (Comment to disable)
 #define BMP280_ENABLE
 #define DHT22_ENABLE
-#define SDS011_ENABLE
+//#define SDS011_ENABLE
 
 //PIN CONFIGURATION
 #define DHT_DATA_PIN D6

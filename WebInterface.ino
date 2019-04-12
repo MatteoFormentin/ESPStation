@@ -140,7 +140,7 @@ void sendDataToMeteoServer(String json)
 
 void getUpdate()
 {
-    t_httpUpdate_return ret = ESPhttpUpdate.update(METEO_SERVER_URL, 80, "/api/firmware_update/air_quality_station", FIRMWARE_VERSION);
+    t_httpUpdate_return ret = ESPhttpUpdate.update(METEO_SERVER_URL, 80, "/api/firmware_update/"+ String(MODEL), FIRMWARE_VERSION);
     switch (ret)
     {
     case HTTP_UPDATE_FAILED:
