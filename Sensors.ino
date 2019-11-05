@@ -51,7 +51,7 @@ float getHumidity()
  *----------------------------------*/
 #ifdef SDS011_ENABLE
 #include "src/SDS011/SDS011.h"
-
+float pm25, pm10;
 
 SDS011 sds_sensor;
 
@@ -62,33 +62,32 @@ void setupSDS()
     sds_sensor.wakeup();
 }
 
-float getPm25()
+void getSDSData()
 {
-    float pm25, pm10;
-    int error = sds_sensor.read(&pm25, &pm10);
+
+    float temp_pm25, temp_pm10;
+    int error = sds_sensor.read(&temp_pm25, &temp_pm10);
     sds_sensor.sleep();
     if (!error)
     {
-        return pm25;
+        pm25 = temp_pm25;
+        pm10 = temp_pm10;
     }
     else
     {
-        return 0;
+        pm25 = -1;
+        pm10 = -1;
     }
+}
+
+float getPm25()
+{
+    return pm25;
 }
 
 float getPm10()
 {
-    float pm25, pm10;
-    int error = sds_sensor.read(&pm25, &pm10);
-    if (!error)
-    {
-        return pm10;
-    }
-    else
-    {
-        return 0;
-    }
+    return pm10;
 }
 
 void sleepSDS()

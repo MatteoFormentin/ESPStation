@@ -5,7 +5,7 @@
 #ifndef CONFIG_H
 
 //OTA PARAMETERS 
-#define FIRMWARE_VERSION "1.0.1" //Remind to update else update will be always performed
+#define FIRMWARE_VERSION "1.0.3" //Remind to update else update will be always performed
 #define MODEL "air_quality_station" //Update model on Meteo Server must be equal
 #define METEO_SERVER_URL "meteo.matteoformentin.com" //Without ending /
 
@@ -13,8 +13,8 @@
 #define HOSTNAME "ESPStation" //Also wifi SSID
 
 //FUNCTION ENABLED (Comment to disable)
-#define BMP280_ENABLE
-#define DHT22_ENABLE
+//#define BMP280_ENABLE
+//#define DHT22_ENABLE
 #define SDS011_ENABLE
 
 //PIN CONFIGURATION
@@ -22,7 +22,7 @@
 #define I2C_SDA 0 //Used in BMP280 library - ESP8266 use configurable i2c pin
 #define I2C_SCL 4
 
-#define SLEEP_TIME 10  //Minutes
+#define SLEEP_TIME 20  //Minutes
 #define BUFFER_SIZE 50 //Do not change
 
 #endif

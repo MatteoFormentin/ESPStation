@@ -6,11 +6,13 @@
 #include "config.h"
 #include <ArduinoJson.h>
 
+unsigned long int start_time;
+
 void setup()
 {
     //CONNECTION SETUP
     setupWiFi();
-
+    start_time = millis();
     /*---- PERFORM EVERY TASK ----*/
     if (!getApMode())
     {
@@ -45,6 +47,10 @@ void setup()
 
 void loop()
 {
+    if (millis() - start_time > 36000)
+    {
+        ESP.restart();
+    }
     handleWebInterface(); //EXECUTED ONLY IF AP NOT CONNECTED
 }
 
@@ -62,6 +68,7 @@ void postData()
     doc["humidity"] = getHumidity();
 #endif
 #ifdef SDS011_ENABLE
+    getSDSData();
     doc["air_quality"]["PM25"] = getPm25();
     doc["air_quality"]["PM10"] = getPm10();
 #endif
