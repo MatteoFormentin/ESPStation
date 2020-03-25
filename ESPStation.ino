@@ -11,7 +11,9 @@ unsigned long int start_time;
 void setup()
 {
     //CONNECTION SETUP
+    Serial.begin(9600);
     setupWiFi();
+    Serial.println("DONE");
     start_time = millis();
     /*---- PERFORM EVERY TASK ----*/
     if (!getApMode())
@@ -28,11 +30,11 @@ void setup()
 #endif
 
         /*---- GET AND SEND DATA ----*/
-        delay(10000); //Wait some time to make sensor acquire some sample
+        //delay(10000); //Wait some time to make sensor acquire some sample
         postData();
 
-        /*---- SLEEP SENSOR ----*/
-#ifdef SDS011_ENABLE
+        /*---- SLEEP SENSORS ----*/
+#ifdef SDS011_ENABLE 
         sleepSDS();
 #endif
 
@@ -47,7 +49,8 @@ void setup()
 
 void loop()
 {
-    if (millis() - start_time > 36000)
+    /*---- PREVENT RUNNING FOREVER IF ERROR READING WI-FI DATA ----*/
+    if (millis() - start_time > 36000 *1000)
     {
         ESP.restart();
     }

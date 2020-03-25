@@ -36,6 +36,9 @@ void setupWiFi()
         {
             ap_mode = true;
             WiFi.disconnect();
+            Serial.println("NON Connesso");
+        } else{
+          Serial.println("Connesso");
         }
     }
     else
@@ -131,16 +134,46 @@ char *getToken()
 
 void sendDataToMeteoServer(String json)
 {
-    HTTPClient http;
+    /* HTTPClient http;
     http.begin("http://" + String(METEO_SERVER_URL) + "/api/update");
     http.addHeader("Content-Type", "application/json");
     http.POST(json);
     http.end();
+*/
+    WiFiClientSecure client;
+    client.setFingerprint("03 FF 9E 02 D8 D4 E4 ED C3 C5 34 9E C1 05 1C EC AA 21");
+    Serial.print("connecting to ");
+    Serial.println(METEO_SERVER_URL);
+    if (!client.connect(METEO_SERVER_URL, 443))
+    {
+        Serial.println("connection failed");
+        return;
+    }
+
+    String post = String("POST /api/update HTTP/1.1\r\n") +
+                 String("Host: ")+ String(METEO_SERVER_URL)+ String("\r\n") +
+                 String("Content-Type: application/json\r\n") +
+                 String("Content-Length: ") + json.length() + String("\r\n\n") + 
+                 json + String("\r\n\r\n");
+
+    Serial.println(post);
+
+    client.print(post);
+
+    String line = client.readStringUntil('\n');
+    if (line.startsWith("{\"state\":\"success\""))
+    {
+        Serial.println("esp8266/Arduino CI successfull!");
+    }
+    else
+    {
+        Serial.println("esp8266/Arduino CI has failed");
+    }
 }
 
 void getUpdate()
 {
-    t_httpUpdate_return ret = ESPhttpUpdate.update(METEO_SERVER_URL, 80, "/api/firmware_update/"+ String(MODEL), FIRMWARE_VERSION);
+    t_httpUpdate_return ret = ESPhttpUpdate.update(METEO_SERVER_URL, 443, "/api/firmware_update/" + String(MODEL), FIRMWARE_VERSION);
     switch (ret)
     {
     case HTTP_UPDATE_FAILED:
