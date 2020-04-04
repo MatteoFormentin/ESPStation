@@ -80,7 +80,6 @@ uint8_t Adafruit_BMP280::spixfer(uint8_t x)
     return SPI.transfer(x);
 
   // software spi
-  //Serial.println("Software SPI");
   uint8_t reply = 0;
   for (int i = 7; i >= 0; i--)
   {

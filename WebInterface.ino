@@ -81,7 +81,6 @@ void handleConfSubmit()
 
 void updateApConfiguration(struct APConf ap, String token)
 {
-    Serial.println("Start updating conf");
     if (SPIFFS.exists("/ap.conf"))
     {
         SPIFFS.remove("/ap.conf");

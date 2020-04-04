@@ -1,3 +1,5 @@
+#include "config.h"
+
 /*-----------------------------------
  *              BMP 280
  *----------------------------------*/
@@ -23,26 +25,32 @@ float getPressure()
 #ifdef DHT22_ENABLE
 
 #include <DHT.h>
-#include <DHT_U.h>
 
-DHT_Unified dht(DHT_DATA_PIN, DHT22);
+DHT dht(DHT_DATA_PIN, DHT22);
 
 void setupDHT()
 {
+    dht.begin();
 }
 
 float getTemperature()
 {
-    sensors_event_t temp;
-    dht.temperature().getEvent(&temp);
-    return temp.temperature;
+    float t = dht.readTemperature();
+    if (isnan(t))
+    {
+        return -1;
+    }
+    return t;
 }
 
 float getHumidity()
 {
-    sensors_event_t hum;
-    dht.humidity().getEvent(&hum);
-    return hum.relative_humidity;
+    float hum = dht.readHumidity();
+    if (isnan(hum))
+    {
+        return -1;
+    }
+    return hum;
 }
 #endif
 
